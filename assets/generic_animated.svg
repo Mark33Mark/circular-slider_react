@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+    <g>
+        <rect x="5" y="5" rx="6" ry="6" width="140" height="140" stroke="black" fill="none" stroke-width="5">
+            <animate attributeName="stroke" values="#0087ff; #e63946; #ffb703; #06d6a0; #0087ff" dur="8s"
+                repeatCount="indefinite" />
+        </rect>
+
+        <path d="M 10,10 140,140" style="stroke-width:5; stroke-linecap:round;">
+            <animate attributeName="stroke" values="#0087ff; #9b5de5; #f15bb5; #00f5d4; #0087ff" dur="11s"
+                repeatCount="indefinite" />
+        </path>
+
+        <path d="M 10,140 140, 10" style="stroke-width:5; stroke-linecap:round;">
+            <animate attributeName="stroke" values="#0087ff; #3a0ca3; #4cc9f0; #f72585; #0087ff" dur="14s"
+                repeatCount="indefinite" />
+        </path>
+    </g>
+</svg>

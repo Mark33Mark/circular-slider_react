@@ -1,0 +1,614 @@
+/*-------------------------------------------------------------------------------
+    [client] DEMO App - Circular Slider For React
+
+    version:   1.0
+    date:      14-July-2026
+    author:    Mark Watson
+    email:     mark@watsonised.me
+    website:   https://get.watsonised.me
+    changelog: no log created
+    -----------------------------------------------------------------------------*/
+
+/*== RESET - https://www.joshwcomeau.com/css/custom-css-reset/ ==*/
+
+/* 1. Box-sizing: Border-box for all elements 
+ *    Simplifies layout calculations by ensuring padding and borders are included 
+ *    in the element's total width and height calculation.
+ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* 2. Prevent font size inflation on mobile */
+html {
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+/* 3. Remove default margins (except dialog for centering) */
+:not(dialog) {
+    margin: 0;
+}
+
+/* 4. Enable smooth size interpolations for animations */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* 5. Core body typography */
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100svh; /* Small viewport height for full coverage */
+}
+
+/* 6. Shorter line heights for headings and forms */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+input,
+label,
+select,
+textarea {
+    line-height: 1.1;
+}
+
+/* 7. Balanced text wrapping */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+p {
+    text-wrap: wrap; /* fallback: for Firefox */
+    text-wrap: pretty; /* supported browsers - Chrome & Safari */
+}
+
+/* 8. Media elements: Responsive and block-level */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* 9. Inherit fonts in form controls */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* 10. Ensure textareas have usable height */
+textarea:not([rows]) {
+    min-height: 10em;
+}
+
+/* 11. Remove list styles only for semantic lists */
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+    padding-inline-start: 0; /* Logical property for RTL */
+}
+
+/* 12. Links: Skip ink on underlines */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+    color: currentColor;
+}
+
+/* 13. Anchored elements: Extra scroll margin */
+:target {
+    scroll-margin-block: 5ex;
+}
+
+/* 14. Isolation for root (e.g., React/Vue apps) */
+#App,
+#root,
+#__next {
+    isolation: isolate;
+}
+
+/* 15. Overflow wrapping for long words */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+}
+
+/*========= DEMO APP  =========*/
+
+body > div#watsonised {
+    min-height: 100svh;
+    background: #f5f7fa;
+    display: flex;
+    justify-content: center;
+}
+
+#watsonised {
+    width: 100%;
+    height: 100%;
+    isolation: isolate; /* prevent host CSS from bleeding IN */
+}
+
+.W8D-SliderDemo {
+    height: 100%;
+    padding: clamp(0.75rem, 1vw, 1rem) clamp(0.5rem, 1vw, 1rem);
+    background: #f5f7fa;
+    font-family:
+        'Inter',
+        system-ui,
+        -apple-system,
+        sans-serif;
+    color: #2d3748;
+}
+
+.W8D-SliderDemoPage {
+    max-width: 850px;
+    margin: clamp(0.01rem, 1vw, 1rem) auto;
+    background: #fff;
+    padding: 1.5rem clamp(0.8rem, 1.5vw, 1.125rem);
+    padding-bottom: 0.125rem;
+    border-radius: 1.25rem;
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.W8D-SliderDemoPageTitle {
+    font-size: clamp(1.6rem, 2vw, 2rem);
+    font-weight: 700;
+    margin-bottom: clamp(0.75rem, 1vw, 1rem);
+    color: #2c3e50;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* change to wrap on mobile */
+    justify-content: center; /* center on mobile */
+}
+
+.W8D-SliderDemoPageIntro {
+    font-size: clamp(1rem, 1.25vw, 1.125rem);
+    color: #5a6a7d;
+    line-height: 1.6;
+    margin-bottom: clamp(1.5rem, 2.5vw, 2.5rem);
+    max-width: 100%;
+    text-align: center;
+}
+
+.W8D-SliderDemoSection {
+    background: #f8fafc;
+    border-radius: 1rem;
+    padding: 0.5rem 1.5rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.W8D-SliderDemoSection_title {
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    font-weight: 600;
+    color: #334155;
+    margin: clamp(0.25rem, 0.8vw, 0.5rem) 0 clamp(1rem, 1.5vw, 1.25rem);
+    border-bottom: 2px solid #f0f4f8;
+    padding-bottom: 0.75rem;
+    text-wrap: wrap;
+}
+
+.W8D-SliderDemoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    position: relative;
+    transform: scale(1); /* Scale down for mobile to fit better */
+    transform-origin: center center;
+}
+
+.W8D-SliderDemoSliderDashboard {
+    display: grid;
+    /* grid-template-columns: repeat(1, 1fr); */
+    gap: 3rem;
+}
+
+.W8D-SliderDemoSliderDashboardWorldView {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.W8D-SliderDemoSliderDashboardWorldView_JsonContainer {
+    width: 90%;
+    margin-top: 4rem;
+}
+
+.W8D-SliderDemoSliderDashboardWorldView_JsonContainer-heading {
+    font-size: 0.85rem;
+    margin: 0.5rem 0;
+}
+
+.W8D-AppTab {
+    padding: 0.75rem 0.85rem;
+    margin: 0.25rem 0.125rem 0.125rem;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #64748b;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    background: none;
+}
+
+.W8D-AppTab_active {
+    border-bottom-color: #3b82f6;
+    background-color: #ecf4ff;
+    border-radius: 8px 8px 0 0;
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+.W8D-AppTabContainer {
+    margin-bottom: 2rem;
+    padding: 0.125rem 0.25rem 2px;
+    border-bottom: 2px solid #e2e8f0;
+    display: flex;
+    overflow-x: auto;
+    /* hide scrollbar but allow scrolling */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.W8D-AppTab:focus,
+.W8D-AppOptionsDropdownTrigger_label:focus {
+    border-radius: 8px 8px 0 0;
+    outline: 2px solid #005fcc;
+    outline-offset: 2px;
+}
+
+.W8D-AppOptionsMenu {
+    display: inline-block;
+    position: relative;
+}
+
+.W8D-AppOptionsMenu:has(.W8D-AppOptionsDropdownTrigger:checked) .arrow {
+    transform: rotate(-180deg);
+    stroke: green;
+}
+
+/* reveal dropdown - triggers wtih CSS state sniffing */
+.W8D-AppOptionsMenu:has(.W8D-AppOptionsDropdownTrigger:checked) .W8D-AppOptionsDropdownMenu {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.W8D-AppOptionsDropdownTrigger {
+    width: 15px;
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.W8D-AppOptionsDropdownTrigger_label {
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem 0.25rem 0 0;
+    box-shadow: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e6f3e9;
+    gap: 0.75rem;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: #333;
+    user-select: none;
+    cursor: pointer;
+    transition:
+        background-color 0.2s,
+        box-shadow 0.2s,
+        filter 0.5s,
+        color 0.5s;
+}
+
+.W8D-AppOptionsDropdownTrigger_label:hover {
+    filter: invert(15%);
+    color: #111;
+}
+
+.W8D-AppOptionsDropdownTrigger_label .arrow {
+    transform: rotate(-90deg);
+    transition: transform 1s ease;
+}
+
+.W8D-AppOptionsDropdownMenu {
+    min-width: 150px;
+    margin: 0;
+    padding: 6px;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem 0.25rem 0 0;
+    position: absolute;
+    top: calc(100% + 2px);
+    right: 1rem;
+    background-color: #fff;
+    box-shadow:
+        0 10px 15px -3px rgba(0, 0, 0, 0.05),
+        0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    z-index: 5;
+    list-style: none;
+    font-size: 0.85rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.5);
+    transform-origin: top right;
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease,
+        visibility 0.8s;
+}
+
+.W8D-AppOptionsDropdownMenu li {
+    padding: 8px 12px;
+    border-radius: 0.25rem 0.25rem 0 0;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    color: #334155;
+    text-decoration: none;
+    font-size: 14px;
+    transition:
+        background-color 0.5s,
+        color 0.5s;
+}
+
+.W8D-AppOptionsDropdownMenu li:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+}
+
+@media (width > 768px) {
+    .W8D-SliderDemoContainer {
+        padding: 1rem;
+    }
+
+    .W8D-SliderDemoPageTitle {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+
+    .W8D-SliderDemoPageIntro {
+        text-align: left;
+    }
+
+    .W8D-SliderDemoSliderDashboard {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto auto;
+    }
+}
+
+/* ============================================== */
+
+.W8D-AppCodeViewbox_mobile {
+    margin: 0.5rem 0;
+}
+
+.W8D-AppCodeButton_mobile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 4px;
+    background: transparent;
+
+    font-size: 0.85rem;
+    background-color: #e6f3e9;
+    color: #333;
+    box-shadow: none;
+    border: 1px solid #e2e8f0;
+    gap: 0.75rem;
+
+    /* hide default browser arrow */
+    list-style: none;
+}
+/* hide default arrow - Safari/Chrome  */
+.W8D-AppCodeButton_mobile::-webkit-details-marker {
+    display: none;
+}
+
+.W8D-AppCodeButton_mobile:hover {
+    filter: invert(15%);
+    color: #111;
+}
+
+.W8D-AppCodeButtonIcon_mobile .arrow {
+    margin-top: 2px;
+    margin-left: 4px;
+    /* elements set to block or inline-block for transform */
+    display: inline-block;
+    transform: rotate(-90deg);
+    font-size: 2.5rem;
+    font-weight: 800;
+
+    transition:
+        transform 1s ease,
+        stroke 1s ease;
+}
+
+.W8D-AppCodeButtonIcon_mobile.open .arrow {
+    transform: rotate(-180deg);
+    stroke: green;
+}
+
+.W8D-AppCodeWrapper {
+    margin-top: 0;
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    overflow: hidden;
+
+    /* transition both the grid track and opacity */
+    transition:
+        grid-template-rows 0.8s ease,
+        opacity 0.8s ease,
+        margin-top 0.8s ease;
+}
+
+.W8D-AppCodeWrapper.open {
+    grid-template-rows: 1fr; /* Animates to the exact natural height */
+    opacity: 1;
+}
+
+.W8D-AppCodeContainer {
+    min-height: 0;
+    text-align: left;
+    overflow: auto;
+}
+
+.W8D-AppCodeContainer pre {
+    margin-top: 0.5rem;
+    padding: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    overflow-x: auto;
+    background: #f8fafc;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    color: #334155;
+    font-size: clamp(0.75rem, 0.85vw, 1rem);
+    line-height: 1.6;
+    font-family: 'Fira Code', 'Roboto Mono', monospace;
+}
+
+/* ============================================== */
+
+.W8D-SliderDemoSliderDashboardWorldView_JsonContainerData {
+    width: 100%;
+    height: 3rem;
+    margin-bottom: 0.85rem;
+    margin-left: 0.5rem;
+}
+
+.RadioButton-Label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #344054;
+    cursor: pointer;
+    margin-right: 1rem;
+    padding: 0.25rem;
+
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.RadioButton-Label:focus-within {
+    border: 2px solid transparent;
+    border-radius: 0.15rem;
+    box-shadow: 0 0 0 4px rgba(35, 175, 20, 0.6);
+}
+
+.RadioButton-Svg {
+    fill: none;
+    vertical-align: middle;
+}
+
+.RadioButton-Svg circle {
+    stroke-width: 2;
+    stroke: rgba(144, 144, 144, 0.85);
+}
+
+.RadioButton-Svg path {
+    stroke: rgba(35, 175, 20, 0.85);
+}
+
+.RadioButton-Svg path.inner {
+    stroke-width: 6;
+    stroke-dasharray: 19;
+    stroke-dashoffset: 19;
+    transition: stroke-dashoffset 1.2s ease 0.25s;
+}
+
+.RadioButton-Svg path.outer {
+    stroke-width: 2;
+    stroke-dasharray: 57;
+    stroke-dashoffset: 57;
+    transition: stroke-dashoffset 1.2s ease;
+}
+
+.RadioButton-Input {
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+}
+
+.RadioButton-Input:checked + .RadioButton-Svg path.inner {
+    stroke-dashoffset: 38;
+}
+
+.RadioButton-Input:checked + .RadioButton-Svg path.outer {
+    stroke-dashoffset: 0;
+}
+
+.RadioButton-Input:focus {
+    width: 1.75rem;
+    height: 1.75rem;
+    position: absolute;
+    border-radius: 50%;
+    transform: translateX(-4px);
+}
+
+.RadioButton-Input:focus-visible {
+    accent-color: unset;
+    outline: none;
+}
+
+/* ============================================== */
+
+.W8D-AppDemoFooter {
+    /* width: 88%;
+    max-width: 780px;
+    padding-top: 0.5rem;
+    position: absolute;
+    text-align: center; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 0.66rem;
+    color: #64748b;
+}
+.W8D-AppDemoFooter p {
+    margin: 0;
+}
+
+/*=== END - NOTHING ELSE TO SEE FROM HERE ===*/

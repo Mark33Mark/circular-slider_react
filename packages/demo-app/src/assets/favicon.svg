@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="135" height="135" viewBox="0 0 135 135">
+    <g transform="translate(0,-161)">
+
+        <path id="rect10" transform="matrix(0.26458333,0,0,0.26458333,0,161.53332)" d="M 0 0 L 0 512 L 512 512 L 512 0 L 0 0 z M 5.4707031 5.4707031 L 506.5293 5.4707031 L 506.5293 506.5293 L 5.4707031 506.5293 L 5.4707031 5.4707031 z " style="fill:none;stroke-width:20;stroke-opacity:1;">
+            <animate attributeName="stroke" values="#0087ff; #e63946; #ffb703; #06d6a0; #0087ff" dur="8s" repeatCount="indefinite" />
+        </path>
+
+        <path id="path4536" d="M 1.4474568,162.98078 134.01921,295.55253" style="fill:none;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none">
+            <animate attributeName="stroke" values="#0087ff; #9b5de5; #f15bb5; #00f5d4; #0087ff" dur="11s" repeatCount="indefinite" />
+        </path>
+
+        <path id="path4536-2" d="M 134.01921,162.98078 1.4474509,295.55254" style="fill:none;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+            <animate attributeName="stroke" values="#0087ff; #3a0ca3; #4cc9f0; #f72585; #0087ff" dur="14s" repeatCount="indefinite" />
+        </path>
+    </g>
+</svg>

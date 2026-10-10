@@ -1,0 +1,176 @@
+/*-------------------------------------------------------------------------------
+    [client] Circular Slider For React
+
+    version:   1.0
+    date:      14-July-2026
+    author:    Mark Watson
+    email:     mark@watsonised.me
+    website:   https://get.watsonised.me
+    changelog: no log created
+    -----------------------------------------------------------------------------*/
+
+.W8D-CircularSlider {
+    position: relative;
+    display: inline-block;
+    width: max-content;
+    outline: none;
+    transition: opacity 1s ease-in;
+}
+
+.W8D-CircularSlider::before {
+    content: '';
+    position: absolute;
+
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border-radius: 50%;
+
+    box-shadow:
+        0 20px 25px -5px rgba(0, 0, 255, 0.15),
+        0 10px 10px -5px rgba(0, 0, 255, 0.08);
+
+    opacity: 0;
+    transform: scale(0.8);
+
+    transition:
+        transform 0.6s ease-in-out,
+        opacity 0.4s ease-in-out;
+
+    pointer-events: none;
+}
+
+.W8D-CircularSlider:focus-within::before {
+    opacity: 1;
+    /* expand outwards to mock an outline-offset */
+    transform: scale(1.2);
+}
+
+/*========= CIRCULAR SLIDER - KNOB  =========*/
+
+.W8D-CircularSliderKnobContainer {
+    position: absolute;
+    z-index: 3;
+    touch-action: none;
+}
+
+.W8D-CircularSliderKnobRing {
+    overflow: visible;
+}
+
+.W8D-CircularSliderKnobRing > :first-child {
+    transform-origin: 50% 50%;
+    stroke: none;
+    animation-timing-function: ease-in-out;
+    animation-duration: 4.5s;
+    animation-iteration-count: infinite;
+    touch-action: none;
+}
+
+/*========= CIRCULAR SLIDER - LABEL =========*/
+
+.W8D-CircularSliderLabelContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    z-index: 1;
+}
+
+.W8D-CircularSliderLabelValueWrapper {
+    height: 33%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.W8D-CircularSliderLabelValue {
+    text-align: center;
+    width: 90%;
+}
+
+.W8D-CircularSliderLabelValue,
+.W8D-CircularSliderLabel_top {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.W8D-CircularSliderLabelValue_prepend,
+.W8D-CircularSliderLabelValue_append {
+    position: relative;
+    transform: translate(-100%, 0);
+}
+
+.W8D-CircularSliderLabelValue_append {
+    right: 0;
+    transform: translate(100%, 0);
+}
+
+.W8D-CircularSliderLabel_bottom {
+    margin-top: -0.5rem;
+}
+
+/*=========  CIRCULAR SLIDER - SVG  =========*/
+
+.W8D-SliderTracks {
+    position: relative;
+    z-index: 2;
+
+    & path {
+        transform-origin: center center;
+    }
+}
+
+.W8D-SliderTracksMask_arc,
+.W8D-SliderTracksMask_not-arc {
+    fill: none;
+    stroke: white;
+}
+
+.W8D-SliderTracksMask_progress-track-path {
+    fill: none;
+    stroke: white;
+    transform-origin: center center;
+    transition: none;
+}
+
+.W8D-SliderTracksForeignObject_main-track {
+    width: 100%;
+    height: 100%;
+    transform-origin: center center;
+}
+
+.W8D-SliderTracksForeignObject_progress-track {
+    width: 100%;
+    height: 100%;
+    transform-origin: center center;
+}
+
+.W8D-SliderTracksMainTrack_arc,
+.W8D-SliderTracksMainTrack_no-arc {
+    fill: none;
+}
+
+/*=========  CIRCULAR SLIDER - ANIM =========*/
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.8);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/*=== END - NOTHING ELSE TO SEE FROM HERE ===*/

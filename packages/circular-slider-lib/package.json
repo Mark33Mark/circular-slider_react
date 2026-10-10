@@ -1,0 +1,58 @@
+{
+    "name": "@watsonised/circular-slider-for-react",
+    "version": "1.2.2",
+    "author": "Mark Watson <mark@watsonised.me> (https://get.watsonised.me)",
+    "main": "./dist/circular-slider.js",
+    "module": "./dist/circular-slider.js",
+    "type": "module",
+    "license": "MIT",
+    "exports": {
+        ".": {
+            "import": "./dist/circular-slider.js"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "prepack": "cp ../../README.md .",
+        "storybook": "storybook dev -p 6116",
+        "build:storybook": "storybook build -o sb_dist",
+        "build": "vite build",
+        "prepublishOnly": "npm run build",
+        "test": "vitest"
+    },
+    "peerDependencies": {
+        "react": "^18.2.0 || ^19.0.0",
+        "react-dom": "^18.2.0 || ^19.0.0"
+    },
+    "devDependencies": {
+        "@storybook/addon-a11y": "^10.6.1",
+        "@storybook/addon-docs": "^10.6.1",
+        "@storybook/addon-vitest": "^10.6.1",
+        "@storybook/react-vite": "^10.6.1",
+        "@vitejs/plugin-react": "^6.1.1",
+        "@vitest/browser-playwright": "4.1.11",
+        "@vitest/coverage-v8": "4.1.11",
+        "jsdom": "^30.1.2",
+        "playwright": "^1.63.0",
+        "react": "^19.3.0",
+        "react-dom": "^19.3.0",
+        "react-syntax-highlighter": "^16.1.1",
+        "rollup-plugin-copy": "^2.0.1",
+        "storybook": "^10.6.1",
+        "vite": "^8.3.2",
+        "vite-plugin-css-injected-by-js": "^5.0.2",
+        "vitest": "4.1.11"
+    },
+    "allowScripts": {
+        "@parcel/watcher@2.6.0": true
+    },
+    "keywords": [
+        "react",
+        "circular slider",
+        "reusable react component",
+        "slider input",
+        "arc slider"
+    ]
+}
