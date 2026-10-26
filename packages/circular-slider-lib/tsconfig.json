@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "checkJs": false,
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "outDir": "./dist",
+        "rootDir": "./src",            /* fix for TS5011 by locking down root source path */
+        "isolatedModules": true,       /* match TS types with Vite/esbuild transpile semantics */
+        "skipLibCheck": true,          /* prevent type conflicts with consumer node_modules */
+        "moduleResolution": "bundler",
+        "jsx": "react-jsx",
+        "target": "esnext",
+        "module": "esnext"
+    },
+    "include": ["src/**/*"]
+}

@@ -85,7 +85,7 @@
 
 ### Built with
 
-[![javascript][javascript]][javascript-url] [![node][nodejs]][nodejs-url] [![npm][npm]][npm-url] [![react][react.js]][react-url]  [![storybook][storybook]][storybook-url] [![sqlite][sqlite]][sqlite-url]
+[![javascript][javascript]][javascript-url] [![typescript][typescript]][typescript-url] [![node][nodejs]][nodejs-url] [![npm][npm]][npm-url] [![react][react.js]][react-url]  [![storybook][storybook]][storybook-url] [![sqlite][sqlite]][sqlite-url]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -97,42 +97,52 @@ Set up as a mono-repo using NPM's `workpaces`
 
 ```sh
   .../circular-slider_react
-            .
-            |-- LICENSE
-            |-- README.md
-            |
-            |-- package.json
-            |-- packages
-                |-- circular-slider-lib
-                |   |-- _stories
-                |   |   |
-                |   |   `-- components
-                |   |
-                |   |-- package.json
-                |   |-- src
-                |   |   |-- components
-                |   |   |-- hooks
-                |   |   |-- index.js
-                |   |   |-- redux
-                |   |   |-- styles
-                |   |   `-- utilities
-                |   |-- vite.config.js
-                |   `-- vitest.config.js
-                |
-                `-- demo-app
-                    |-- index.html
-                    |-- package.json
-                    |-- public
-                    |   |-- data
-                    |   |-- robots.txt
-                    |   |-- sql-wasm.wasm
-                    |   `-- sqlite.worker.js
-                    |-- src
-                    |   |-- assets
-                    |   |-- components
-                    |   |-- hooks
-                    |   `-- styling
-                    `-- vite.config.js
+              .
+              |-- LICENSE
+              |-- README.md
+              |-- assets
+              |   |-- arc_circular_slider.webp
+              |   `-- logo_circular_slider.svg
+              |-- package.json
+              |
+              `-- packages
+                  |-- circular-slider-lib
+                  |   |-- _stories
+                  |   |   `-- components
+                  |   |
+                  |   |-- index.d.ts
+                  |   |-- package.json
+                  |   |
+                  |   |-- src
+                  |   |   |-- components
+                  |   |   |-- hooks
+                  |   |   |-- index.js
+                  |   |   |-- redux
+                  |   |   |-- styles
+                  |   |   `-- utilities
+                  |   |
+                  |   |-- tsconfig.json
+                  |   |-- vite.config.js
+                  |   `-- vitest.config.js
+                  |
+                  `-- demo-app
+                      |-- index.html
+                      |-- package.json
+                      |
+                      |-- public
+                      |   |-- data
+                      |   |-- robots.txt
+                      |   |-- sql-wasm.wasm
+                      |   |-- sqlite.worker.js
+                      |   `-- sqlite.worker.js.map
+                      |
+                      |-- src
+                      |   |-- assets
+                      |   |-- components
+                      |   |-- hooks
+                      |   `-- styling
+                      |
+                      `-- vite.config.js
 
 ```
 
@@ -142,7 +152,7 @@ Set up as a mono-repo using NPM's `workpaces`
 <!-- GETTING STARTED -->
 ## Getting Started
 
-Designed to be imported into your React project and consumed as a component in your application.  Refer to the [demonstration][demonstration-url] or [storybook][storybook-url], in particular you can interact with the available properties  for the circular-slider component to get a greater understanding of what is possible with this project.
+Designed to be imported into your React project, with or without typescript, and consumed as a component in your application.  Refer to the [demonstration][demonstration-url] or [storybook][storybook-url], in particular you can interact with the available properties  for the circular-slider component to get a greater understanding of what is possible with this project.
 
 ### Use in your React project
 
@@ -177,7 +187,7 @@ To use this component in your project, install the package, my example uses NPM:
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-### Default - no customising
+### Default - raw, without any custom props
 
 ```jsx
 
@@ -336,7 +346,7 @@ For more examples, please refer to the [demonstration][demonstration-url] or [st
 <!-- ROADMAP -->
 ## Roadmap  
 - [ ]  SolidJS version - I think SolidJS is significantly better than React, using signals to manage state was always going to be better than React's approach of a virtual DOM.  
-- [ ] Typescript - maybe, although I don't think it is needed with this simple component.
+- [x] Typescript - decided to add types, so that you don't have to 👌🏼.
 
 See the [open issues](https://github.com/Mark33Mark/circular-slider_react/issues) for a full list of proposed features (and known issues).
 
@@ -464,5 +474,5 @@ No problem if you're not in a position to make a goodwill payment... I get it.
 <!-- Programming Language -->
 [javascript]: https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000
 [javascript-url]: https://ecma-international.org/publications-and-standards/standards/ecma-262/
-
-
+[typescript]: https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff
+[typescript-url]: https://www.typescriptlang.org/

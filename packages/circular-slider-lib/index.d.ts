@@ -1,0 +1,54 @@
+import type { ReactNode, RefObject, FC } from 'react';
+
+export interface CircularSliderProps {
+    arcStart?: number;
+    arcEnd?: number;
+    children?: ReactNode;
+    data?: (string | number)[];
+    dataIndex?: number;
+    direction?: 'clockwise' | 'anti-clockwise';
+    isDragging?: (dragging: boolean) => void;
+    keypressStep?: number;
+    knobAnimated?: boolean;
+    knobColor?: string;
+    knobDraggable?: boolean;
+    knobHide?: boolean;
+    knobHideRing?: boolean;
+    knobPosition?: number | 'top' | 'right' | 'bottom' | 'left';
+    knobRingRadius?: number;
+    knobSize?: number;
+    label?: string;
+    labelAppendCss?: string;
+    labelAppendValue?: string;
+    labelBottom?: boolean;
+    labelColor?: string;
+    labelFontSize?: string | number;
+    labelHideValue?: boolean;
+    labelHorizontalOffset?: string | number;
+    labelPrependCss?: string;
+    labelPrependValue?: string;
+    labelShow?: boolean;
+    labelValueFontSize?: string | number;
+    labelValueHorizontalOffset?: string | number;
+    labelValueVerticalOffset?: string | number;
+    labelVerticalOffset?: string | number;
+    limitDragRange?: boolean;
+    max?: number;
+    min?: number;
+    onChange?: (value: number | string) => void;
+    progressColorFrom?: string;
+    progressColorTo?: string;
+    progressGradient?: boolean;
+    progressLineCap?: 'butt' | 'round' | 'square';
+    progressSize?: number;
+    ref?: RefObject<HTMLDivElement | null>;
+    trackColor?: string;
+    trackDraggable?: boolean;
+    trackGradient?: boolean;
+    trackSize?: number;
+    value?: number | string;
+    width?: number;
+    [key: string]: any;
+}
+
+export declare const CircularSlider: FC<CircularSliderProps>;

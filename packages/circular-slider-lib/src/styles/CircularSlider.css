@@ -1,13 +1,28 @@
 /*-------------------------------------------------------------------------------
     [client] Circular Slider For React
 
-    version:   1.0
-    date:      14-July-2026
-    author:    Mark Watson
-    email:     mark@watsonised.me
-    website:   https://get.watsonised.me
-    changelog: no log created
+    version:    1.0
+    date:       14-July-2026
+    author:     Mark Watson
+    email:      mark@watsonised.me
+    website:    https://get.watsonised.me
+    changelog:  20261026 - added defensive styles when component used in 
+                environments with global styling overlapping this project.
     -----------------------------------------------------------------------------*/
+
+/* Protect your component namespace from loose consumer element styles */
+.W8D-CircularSlider,
+.W8D-CircularSlider * {
+    box-sizing: border-box;
+}
+
+.W8D-CircularSlider code,
+.W8D-CircularSlider span,
+.W8D-CircularSlider svg {
+    all: unset; /* reseting all inherited global element rules */
+    /* reapplying only the specific structural properties needed */
+    display: inline-block;
+}
 
 .W8D-CircularSlider {
     position: relative;

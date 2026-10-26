@@ -23,6 +23,7 @@ jspm_packages/
 # ==========================================
 # Standard build folders (React/Vite/SolidJS/Netlify)
 dist/
+**/*/sb_dist/
 dist-ssr/
 build/
 storybook-static/
@@ -97,3 +98,7 @@ playwright/.local-browsers
 # Ignore dynamically copied root files
 # ==========================================
 *.txt
+
+packages/**/*/README.md
+packages/**/*/assets/
+
