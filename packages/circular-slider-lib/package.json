@@ -1,6 +1,6 @@
 {
     "name": "@watsonised/circular-slider-for-react",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "author": "Mark Watson <mark@watsonised.me> (https://get.watsonised.me)",
     "main": "./dist/circular-slider.js",
     "module": "./dist/circular-slider.js",
