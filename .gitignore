@@ -101,4 +101,4 @@ playwright/.local-browsers
 
 packages/**/*/README.md
 packages/**/*/assets/
-
+assets/
