@@ -1,6 +1,6 @@
 {
     "name": "@watsonised/circular-slider-for-react",
-    "version": "1.2.3",
+    "version": "1.2.4",
     "author": "Mark Watson <mark@watsonised.me> (https://get.watsonised.me)",
     "main": "./dist/circular-slider.js",
     "module": "./dist/circular-slider.js",
@@ -21,7 +21,7 @@
         "build": "vite build && tsc",
         "watch:vite": "vite build --watch",
         "watch:tsc": "tsc --watch --noEmit",
-        "prepack": "cp ../../README.md . && cp -r ../../assets .",
+        "prepack": "cp ../../README.md .",
         "prepublishOnly": "npm run build",
         "test": "vitest"
     },

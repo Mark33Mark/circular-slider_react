@@ -9,7 +9,7 @@
     "scripts": {
         "dev:demo": "npm run dev -w demo_circular-slider-for-react",
         "build:lib": "npm run build -w @watsonised/circular-slider-for-react",
-        "bump-publish:lib": "npm run build && npm version patch -w @watsonised/circular-slider-for-react && npm run publish:lib",
+        "bump-publish:lib": "npm run build:lib && npm version patch -w @watsonised/circular-slider-for-react && npm run publish:lib",
         "publish:lib": "BROWSER=none npm publish -w @watsonised/circular-slider-for-react --access public",
         "build:demo": "npm run build -w demo_circular-slider-for-react",
         "storybook": "npm run storybook -w @watsonised/circular-slider-for-react",
